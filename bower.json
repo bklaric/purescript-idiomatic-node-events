@@ -1,5 +1,12 @@
 {
   "name": "purescript-idiomatic-node-events",
+  "description": "An idiomatic wrapper for Node's Events API.",
+  "homepage": "https://github.com/bklaric/purescript-idiomatic-node-events",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bklaric/purescript-idiomatic-node-events.git"
+  },
+  "license": "AGPL-3.0",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -8,6 +15,7 @@
   ],
   "dependencies": {
     "purescript-effect": "^0.1.0",
-    "purescript-exceptions": "https://github.com/natefaubion/purescript-exceptions.git#^3.1.0"
+    "purescript-exceptions": "https://github.com/natefaubion/purescript-exceptions.git#^3.1.0",
+    "purescript-foreign": "^4.0.1"
   }
 }

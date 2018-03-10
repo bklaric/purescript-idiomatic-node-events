@@ -1,8 +1,11 @@
 module Node.Events.EventEmitter where
 
 import Control.Monad.Effect (Effect)
+import Data.Foreign (Foreign)
 import Node.Events (Event)
 import Node.Events.EventListener (EventListener, toEventListener)
+
+foreign import undefined :: forall anything. anything
 
 class EventEmitter emitter where
     on :: forall listener.
@@ -13,18 +16,62 @@ class EventEmitter emitter where
         Event listener -> EventListener listener -> emitter -> Effect emitter
     prependOnceListener :: forall listener.
         Event listener -> EventListener listener -> emitter -> Effect emitter
+    removeListener :: forall listener.
+        Event listener -> EventListener listener -> emitter -> Effect emitter
+    removeAllListeners :: forall listener.
+        Event listener -> emitter -> Effect emitter
+    emit :: forall listener.
+        Event listener -> Array Foreign -> emitter -> Effect Boolean
+    listeners :: forall listener.
+        Event listener -> emitter -> Effect (Array (EventListener listener))
+    listenerCount :: forall listener. Event listener -> emitter -> Effect Int
+    getMaxListeners :: emitter -> Effect Int
+    setMaxListeners :: Int -> emitter -> Effect emitter
+    eventNames :: emitter -> Effect (Array String)
 
-foreign import defaultOn :: forall emitter listener.
+foreign import defaultOn :: forall listener emitter.
     Event listener -> EventListener listener -> emitter -> Effect emitter
 
-foreign import defaultOnce :: forall emitter listener.
+foreign import defaultOnce :: forall listener emitter.
     Event listener -> EventListener listener -> emitter -> Effect emitter
 
-foreign import defaultPrependListener :: forall emitter listener.
+foreign import defaultPrependListener :: forall listener emitter.
     Event listener -> EventListener listener -> emitter -> Effect emitter
 
-foreign import defaultPrependOnceListener :: forall emitter listener.
+foreign import defaultPrependOnceListener :: forall listener emitter.
     Event listener -> EventListener listener -> emitter -> Effect emitter
+
+foreign import defaultRemoveListener :: forall listener emitter.
+    Event listener -> EventListener listener -> emitter -> Effect emitter
+
+foreign import defaultRemoveAllListeners :: forall listener emitter.
+    Event listener -> emitter -> Effect emitter
+
+foreign import defaultEmit :: forall listener emitter.
+    Event listener -> Array Foreign -> emitter -> Effect Boolean
+
+foreign import defaultListeners :: forall listener emitter.
+    Event listener -> emitter -> Effect (Array (EventListener listener))
+
+foreign import defaultListenerCount :: forall listener emitter.
+    Event listener -> emitter -> Effect Int
+
+foreign import defaultGetMaxListeners :: forall emitter.
+    emitter -> Effect Int
+
+foreign import defaultSetMaxListeners :: forall emitter.
+    Int -> emitter -> Effect emitter
+
+foreign import defaultEventNames :: forall emitter.
+    emitter -> Effect (Array String)
+
+addListener :: forall listener emitter. EventEmitter emitter =>
+    Event listener -> EventListener listener -> emitter -> Effect emitter
+addListener = on
+
+addListener' :: forall listener emitter. EventEmitter emitter =>
+    Event listener -> listener -> emitter -> Effect emitter
+addListener' = on'
 
 on' :: forall listener emitter. EventEmitter emitter =>
     Event listener -> listener -> emitter -> Effect emitter
@@ -46,10 +93,6 @@ prependOnceListener' :: forall listener emitter. EventEmitter emitter =>
 prependOnceListener' event listener emitter =
     prependOnceListener event (toEventListener listener) emitter
 
-addListener :: forall listener emitter. EventEmitter emitter =>
-    Event listener -> EventListener listener -> emitter -> Effect emitter
-addListener = on
-
-addListener' :: forall listener emitter. EventEmitter emitter =>
-    Event listener -> listener -> emitter -> Effect emitter
-addListener' = on'
+removeAllListeners_ :: forall emitter. EventEmitter emitter =>
+    emitter -> Effect emitter
+removeAllListeners_ emitter = removeAllListeners undefined emitter
