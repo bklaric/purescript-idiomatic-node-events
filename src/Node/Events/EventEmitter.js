@@ -1,9 +1,22 @@
 "use strict";
 
-exports.defaultOn = function () { }
+exports.toEventListener = function (listener) {
+    return function () { // This function receives all event arguments.
+        const argumentsArray = Array.from(arguments)
+        var listenerResult = listener
+        for (var index = 0; index < argumentsArray.length; ++index){
+            listenerResult = listenerResult(argumentsArray[index])
+        }
+        listenerResult()
+    }
+}
 
-exports.undefined = undefined
-
-exports.toEventCallback = undefined
-
-exports.defaultOn_ = undefined
+exports.defaultOn = function (event) {
+    return function (listener) {
+        return function (emitter) {
+            return function () {
+                return emitter.on(event, listener)
+            }
+        }
+    }
+}
