@@ -2,7 +2,7 @@ module Node.Events where
 
 import Prelude
 
-import Control.Monad.Eff.Exception (Error)
+import Control.Monad.Effect.Exception (Error)
 import Control.Monad.Effect (Effect)
 
 newtype Event listener = Event String

@@ -15,7 +15,7 @@
     "output"
   ],
   "dependencies": {
-    "purescript-exceptions": "https://github.com/natefaubion/purescript-exceptions.git#^3.1.0",
+    "purescript-exceptions": "https://github.com/natefaubion/purescript-exceptions.git#df042ac0feebcb8d9ca4a1a5e1fc23757cd8c7b9",
     "purescript-foreign": "^4.0.1"
   }
 }
