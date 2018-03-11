@@ -1,15 +1,14 @@
-module Node.Events.EventEmitterEvents where
+module Node.Events.EventEmitter.Events where
 
 import Prelude
 
 import Control.Monad.Effect (Effect)
+import Data.Foreign (Foreign)
 import Node.Events (Event(..))
 import Node.Events.EventListener (EventListener)
 
-newListener :: forall listener.
-    Event (Event listener -> EventListener listener -> Effect Unit)
+newListener :: Event (Event Foreign -> EventListener Foreign -> Effect Unit)
 newListener = Event "newListener"
 
-removeListener :: forall listener.
-    Event (Event listener -> EventListener listener -> Effect Unit)
+removeListener :: Event (Event Foreign -> EventListener Foreign -> Effect Unit)
 removeListener = Event "removeListener"
