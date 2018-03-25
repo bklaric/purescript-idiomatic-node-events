@@ -2,7 +2,7 @@ module Node.Events.EventEmitter where
 
 import Control.Monad.Effect (Effect)
 import Data.Foreign (Foreign)
-import Node.Events (Event)
+import Node.Events.Event (Event)
 import Node.Events.EventListener (EventListener, toEventListener)
 
 foreign import undefined :: forall anything. anything
