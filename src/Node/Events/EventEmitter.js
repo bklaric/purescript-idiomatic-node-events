@@ -1,7 +1,5 @@
 "use strict";
 
-exports.undefined = undefined
-
 exports.defaultOn = function (event) {
     return function (listener) {
         return function (emitter) {
