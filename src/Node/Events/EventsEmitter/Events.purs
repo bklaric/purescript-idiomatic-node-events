@@ -2,7 +2,7 @@ module Node.Events.EventEmitter.Events where
 
 import Prelude
 
-import Data.Foreign (Foreign)
+import Foreign (Foreign)
 import Effect (Effect)
 import Node.Events.Event (Event(..))
 import Node.Events.EventEmitter (class EventEmitter)
