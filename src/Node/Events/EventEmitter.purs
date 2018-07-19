@@ -1,6 +1,6 @@
 module Node.Events.EventEmitter where
 
-import Data.Foreign (Foreign)
+import Foreign (Foreign)
 import Effect (Effect)
 import Node.Events.Event (Event)
 import Node.Events.EventListener (EventListener, toEventListener)
